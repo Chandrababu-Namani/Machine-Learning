@@ -40,7 +40,7 @@ def main():
         scaler = StandardScaler()
 
         # Normalize the DataFrame
-        normalized_data = pd.DataFrame(scaler.fit_transform(user_data), columns=user.columns)
+        normalized_data = pd.DataFrame(scaler.fit_transform(user_data), columns=user_data.columns)
 
         # Perform prediction using the loaded classifier
         prediction = classifier.predict(normalized_data)
