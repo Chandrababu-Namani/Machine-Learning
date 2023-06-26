@@ -2,7 +2,9 @@ import altair as alt
 import streamlit as st
 import pickle
 import pandas as pd
+import joblib
 
+# Load the classifier from the pickle file
 num_lab_procedures = st.number_input("Enter no. of lab procedures [1-132]:")
 num_medications = st.number_input("Enter no. of medications [1-132]:")
 time_in_hospital = st.number_input("Enter the amount of time in hospital [1-14]:")
@@ -16,8 +18,6 @@ number_emergency = st.number_input("Enter the emergency number [1-76]:")
 def main():
     # Streamlit interface title
     st.title("Decision Tree Classifier Interface")
-    with open('decision_tree_classifier.pkl', 'rb') as f:
-        classifier = pickle.load(f)
     # Perform classification based on user input
     if st.button("Classify"):
         # Create a DataFrame from user input
@@ -40,7 +40,8 @@ def main():
 
         # Normalize the DataFrame
         normalized_data = pd.DataFrame(scaler.fit_transform(user_data), columns=user_data.columns)
-
+        classifier = joblib.load('decision_tree_classifier.pkl')
+        
         # Perform prediction using the loaded classifier
         prediction = classifier.predict(normalized_data)
 
