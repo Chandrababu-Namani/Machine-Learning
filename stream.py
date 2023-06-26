@@ -2,7 +2,7 @@ import altair as alt
 import streamlit as st
 import pickle
 import pandas as pd
-import joblib
+
 
 # Load the classifier from the pickle file
 num_lab_procedures = st.number_input("Enter no. of lab procedures [1-132]:")
@@ -40,7 +40,8 @@ def main():
 
         # Normalize the DataFrame
         normalized_data = pd.DataFrame(scaler.fit_transform(user_data), columns=user_data.columns)
-        classifier = joblib.load('decision_tree_classifier.pkl')
+        with open('decision_tree_classifier.pkl', 'rb') as f:
+            classifier = pickle.load(f)
         
         # Perform prediction using the loaded classifier
         prediction = classifier.predict(normalized_data)
