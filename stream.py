@@ -17,7 +17,7 @@ def main():
     # Streamlit interface title
     st.title("Decision Tree Classifier Interface")
     with open('decision_tree_classifier.pkl', 'rb') as f:
-    classifier = pickle.load(f)
+        classifier = pickle.load(f)
     # Perform classification based on user input
     if st.button("Classify"):
         # Create a DataFrame from user input
